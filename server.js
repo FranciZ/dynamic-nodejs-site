@@ -7,6 +7,12 @@ app.get('/', function(req, res){
 
 });
 
+app.get('/about', function(req, res){
+
+	res.send('You are on the about page');
+
+});
+
 app.listen(3000, function(){
 
 	console.log('Server is running');
