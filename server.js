@@ -1,20 +1,38 @@
 var express = require('express');
 var app = express();
+var database = require('./database');
+var router = require('./router');
+var bodyParser = require('body-parser');
 
-app.get('/', function(req, res){
+// Initialization of our server
 
-	res.send('You are on the root route');
+function start(){
 
-});
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded());
 
-app.get('/about', function(req, res){
+	app.use('/', express.static('public'));
+	app.use('/cms', express.static('cms'));
 
-	res.send('You are on the about page');
+	database.openDatabase(function(){
 
-});
+		setupModels();
 
-app.listen(3000, function(){
+		app.listen(3000, function(){
 
-	console.log('Server is running');
+			router(app);
 
-});
+		});
+
+	});
+
+}
+
+function setupModels(){
+
+	require('./models/project');
+
+}
+
+start();
+
