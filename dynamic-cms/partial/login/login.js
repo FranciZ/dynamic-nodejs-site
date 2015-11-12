@@ -1,11 +1,13 @@
-angular.module('dynamicCms').controller('LoginCtrl',function($scope, $http){
+angular.module('dynamicCms').controller('LoginCtrl',function($rootScope, $state, $scope, $http){
 
 	$scope.login = function(){
 
 		$http.post('http://localhost:3000/api/login', $scope.user)
 		.success(function(res){
 
-			console.log(res);
+			$rootScope.token = res.token;
+
+			$state.go('projects');
 
 		});
 

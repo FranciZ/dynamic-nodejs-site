@@ -1,0 +1,15 @@
+<div class="col-md-12" ng-controller="ProjectsCtrl">
+
+	<table class="table table-striped">
+		<tr ng-repeat="project in projects">
+			<td>{{project.title}}</td>
+			<td>{{project.description}}</td>
+			<td>{{project.timeStamp | date:'dd/MM/yyyy'}}</td>
+			<td>
+				<div class="btn btn-xs btn-danger" ng-click="remove(project)">Remove</div>
+				<div class="btn btn-xs btn-info">Edit</div>
+			</td>
+		</tr>
+	</table>
+
+</div>

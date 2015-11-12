@@ -6,6 +6,10 @@ angular.module('dynamicCms').config(function($stateProvider, $urlRouterProvider)
         url: '/login',
         templateUrl: 'partial/login/login.html'
     });
+    $stateProvider.state('projects', {
+        url: '/projects',
+        templateUrl: 'partial/projects/projects.html'
+    });
     /* Add New States Above */
     $urlRouterProvider.otherwise('/home');
 
