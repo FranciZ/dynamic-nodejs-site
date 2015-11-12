@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var token = '2309dfhdsf0lkasdASDasd821lk';
+
 
 module.exports = function(app){
 
@@ -19,7 +21,21 @@ module.exports = function(app){
 
 	});
 
-	app.post('/api/project', function(req, res){
+	app.post('/api/login', function(req, res){
+
+		var username = 'franci';
+		var password = 'mypassword';
+
+		if(req.body.username === username && req.body.password === password){
+			// UNSERCURE authentication successful
+			res.send({token:token});
+		}else{
+			res.sendStatus(401);
+		}
+
+	});
+
+	app.post('/api/project', myAuth, function(req, res){
 
 		var Project = mongoose.model('Project');
 
@@ -32,10 +48,35 @@ module.exports = function(app){
 			res.sendStatus(200);
 
 		});
-
+		
 	});
 
 };
+
+function myAuth(req, res, next){
+
+	if(req.query.token === token){
+
+			console.log('Next');
+
+			next();
+
+		}else{
+
+			res.sendStatus(401);
+
+		}
+
+}
+
+
+
+
+
+
+
+
+
 
 
 
