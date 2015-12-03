@@ -20,6 +20,7 @@ module.exports = function(app){
 
 	});
 
+    
 	app.get('/api/project', function(req, res){
 
 		var Project = mongoose.model('Project');
@@ -37,23 +38,27 @@ module.exports = function(app){
 
 	});
 
-	app.post('/api/project', myAuth, function(req, res){
+	app.post('/api/project', function(req, res){
 
 		var Project = mongoose.model('Project');
+        
+        console.log(req.body);
 
 		var project = new Project(req.body);
 
 		project.save(function(err){
 
-			console.log(err);
-
-			res.sendStatus(200);
+			if(!err){
+				res.send(project);
+			}else{
+				res.sendStatus(400);
+			}
 
 		});
 		
 	});
 
-	app.delete('/api/project/:id', myAuth, function(req, res){
+	app.delete('/api/project/:id', function(req, res){
 
 		var Project = mongoose.model('Project');
 
@@ -69,14 +74,14 @@ module.exports = function(app){
 
 	});
 
-	app.put('/api/project/:id', myAuth, function(req, res){
+	app.put('/api/project/:id', function(req, res){
 
 		var Project = mongoose.model('Project');
 
-		Project.findByIdAndUpdate(req.params.id, req.body, function(err, doc){
+		Project.findByIdAndUpdate(req.params.id, req.body,{new: true}, function(err, doc){
 
 			if(!err){
-				res.sendStatus(200);
+				res.send(doc);
 			}else{
 				res.sendStatus(400);
 			}

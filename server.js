@@ -1,17 +1,24 @@
-var express = require('express');
-var app = express();
-var database = require('./database');
-var router = require('./router');
-var bodyParser = require('body-parser');
+var express     = require('express');
+var bodyParser  = require('body-parser');
+var app         = express();
+
+var database    = require('./database');
+var router      = require('./router');
+
+
 
 // Initialization of our server
 
 function start(){
 
+    // middlewares for processing the request
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded());
 	app.use(allowCrossDomain);
+    
+    // serve content from the public folder 
 	app.use('/', express.static('public'));
+    // serve content from the cms folder
 	app.use('/cms', express.static('cms'));
 
 	database.openDatabase(function(){

@@ -6,7 +6,8 @@ var projectSchema = mongoose.Schema({
 	description	: { type:String },
 	timeStamp	: { type:Date, default:Date.now },
 	url 		: String,
-	imageUrl	: String
+	imageUrl	: String,
+    author      : String
 
 });
 
