@@ -4,9 +4,7 @@ var token = '2309dfhdsf0lkasdASDasd821lk';
 
 module.exports = function(app){
 
-
-
-	app.post('/api/login', function(req, res){
+    app.post('/api/login', function(req, res){
 
 		var username = 'franci';
 		var password = 'mypassword';
@@ -19,8 +17,8 @@ module.exports = function(app){
 		}
 
 	});
-
     
+    // Project routes
 	app.get('/api/project', function(req, res){
 
 		var Project = mongoose.model('Project');
@@ -37,7 +35,6 @@ module.exports = function(app){
 		});
 
 	});
-
 	app.post('/api/project', function(req, res){
 
 		var Project = mongoose.model('Project');
@@ -57,7 +54,6 @@ module.exports = function(app){
 		});
 		
 	});
-
 	app.delete('/api/project/:id', function(req, res){
 
 		var Project = mongoose.model('Project');
@@ -73,7 +69,6 @@ module.exports = function(app){
 		});
 
 	});
-
 	app.put('/api/project/:id', function(req, res){
 
 		var Project = mongoose.model('Project');
@@ -89,7 +84,42 @@ module.exports = function(app){
 		});
 
 	});
-
+    
+    // Post routes
+    app.get('/api/post', function(req, res){
+       
+        var Post = mongoose.model('Post');
+        
+        Post.find(function(err, docs){
+           
+            if(err){
+                res.sendStatus(400);
+            }else{
+                res.send(docs);
+            }
+            
+        });
+        
+    });
+    
+    app.post('/api/post', function(req, res){
+       
+        var Post        = mongoose.model('Post');
+        var postData    = req.body;
+        var post        = new Post(postData);
+        
+        post.save(function(err){
+           
+            if(err){
+                res.sendStatus(400);
+            }else{
+                res.send(post);
+            }
+            
+        });
+        
+    });
+    
 };
 
 function myAuth(req, res, next){

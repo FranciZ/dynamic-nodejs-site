@@ -5,7 +5,7 @@ var app         = express();
 var database    = require('./database');
 var router      = require('./router');
 
-
+var PORT = 3000;
 
 // Initialization of our server
 
@@ -25,9 +25,11 @@ function start(){
 
 		setupModels();
 
-		app.listen(3000, function(){
+		app.listen(PORT, function(){
 
+            // routes for our API
 			router(app);
+            console.log('Server running on http://localhost:'+PORT)
 
 		});
 
@@ -38,16 +40,19 @@ function start(){
 function setupModels(){
 
 	require('./models/project');
+    require('./models/post');
 
 }
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
+    
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     next();
+    
 }
 
 
