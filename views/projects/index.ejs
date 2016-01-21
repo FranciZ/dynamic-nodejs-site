@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My <%= title %> Page</title>
+    <script src="<%= jsSrc %>"></script>
+</head>
+<body>
+
+    <h1>Welcome to my <%= title %> page</h1>
+
+    <% for(var i=0;i<projects.length;i++) { %>
+    <div class="project-item">
+
+        <h3><%= projects[i].title %></h3>
+        <p><%= projects[i].author %></p>
+        <p><%= projects[i].timeStamp %></p>
+
+    </div>
+    <% } %>
+
+</body>
+</html>

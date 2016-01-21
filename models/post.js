@@ -8,7 +8,9 @@ var postSchema = mongoose.Schema({
 	url 		: String,
 	imageUrl	: String,
     author      : String,
-    excerpt     : String
+    excerpt     : String,
+    view        : Number,
+    published   : Boolean
 
 });
 

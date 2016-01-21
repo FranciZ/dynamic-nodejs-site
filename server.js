@@ -7,6 +7,8 @@ var router      = require('./router');
 
 var PORT = 3000;
 
+GLOBAL.APP = app;
+
 // Initialization of our server
 
 function start(){
@@ -15,7 +17,9 @@ function start(){
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded());
 	app.use(allowCrossDomain);
-    
+
+    app.set('view engine', 'ejs');
+
     // serve content from the public folder 
 	app.use('/', express.static('public'));
     // serve content from the cms folder
@@ -41,6 +45,7 @@ function setupModels(){
 
 	require('./models/project');
     require('./models/post');
+    require('./models/file');
 
 }
 
@@ -55,6 +60,4 @@ var allowCrossDomain = function(req, res, next) {
     
 }
 
-
 start();
-

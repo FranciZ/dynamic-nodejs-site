@@ -16,8 +16,61 @@ module.exports = function(app){
 			res.sendStatus(401);
 		}
 
-	});
-    
+    });
+
+    APP.get('/api/files', function(req, res){
+
+        var File = mongoose.model('File');
+
+        File.find(function(err, docs){
+
+            if(err){
+                res.sendStatus(400);
+            }else{
+
+                res.send(docs);
+
+            }
+
+        });
+
+    });
+
+    APP.post('/api/file', function(req, res){
+
+        var data = req.body;
+
+        console.log(data);
+
+        var File = mongoose.model('File');
+
+        var file = new File(data);
+
+        file.save(function(err){
+
+            if(!err) {
+                res.sendStatus(200);
+            }else{
+                res.sendStatus(400);
+            }
+
+        });
+
+    });
+
+    app.get('/projects', function(req, res){
+
+        var Project = mongoose.model('Project');
+
+        Project.find(function(err, docs){
+
+            res.render('projects/index', { title:'Projects', projects:docs, jsSrc:'js/about.js' });
+
+        });
+
+
+    });
+
     // Project routes
 	app.get('/api/project', function(req, res){
 
@@ -35,6 +88,7 @@ module.exports = function(app){
 		});
 
 	});
+
 	app.post('/api/project', function(req, res){
 
 		var Project = mongoose.model('Project');
